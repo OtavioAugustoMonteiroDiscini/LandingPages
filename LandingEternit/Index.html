@@ -12,6 +12,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
     <link rel="manifest" href="img/site.webmanifest">
     <link href="stylesheet.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </head>
 <body>
@@ -141,7 +143,7 @@
         <h2 data-aos="fade-right">Solicite sua cotação agora mesmo:</h2>
         <form onsubmit="enviarLead(event)" data-aos="zoom-in">
             <input type="text" name="nome" placeholder="Seu nome" required>
-            <input type="tel" name="telefone" placeholder="Telefone com DDD" required>
+            <input class="sp_celphones" type="tel" name="telefone" placeholder="Telefone com DDD" required>
             <select name="cidade" id="cidade-select" required>
                 <option value="">Selecione sua cidade</option>
                  <option value="Ourinhos">Ourinhos</option>
@@ -167,6 +169,21 @@
     <footer>
         <p>&copy; 2025 Ourimadeiras. <a href="https://www.seusite.com.br" target="_blank">Acesse nosso site</a></p>
     </footer>
+
+<script>
+$(document).ready(function(){
+    var SPMaskBehavior = function (val) {
+      return val.replace(/\D/g, '').length === 13 ? '+55 (00) 00000-0000' : '+55 (00) 0000-00009';
+    },
+    spOptions = {
+      onKeyPress: function(val, e, field, options) {
+          field.mask(SPMaskBehavior.apply({}, arguments), options);
+        }
+    };
+
+    $('.sp_celphones').mask(SPMaskBehavior, spOptions);
+});
+</script>
 
     <script>
         const cidadeSelect = document.getElementById('cidade-select');
